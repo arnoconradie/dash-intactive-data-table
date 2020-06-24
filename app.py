@@ -1,16 +1,26 @@
 import dash
-import dash_table
-import pandas as pd
+#mport dash_auth
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/solar.csv')
+##xternal_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
+                "//fonts.googleapis.com/css?family=Raleway:400,300,600",
+                "https://codepen.io/bcd/pen/KQrXdb.css",
+                "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
+                "https://codepen.io/dmcomfort/pen/JzdzEZ.css"]
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, url_base_pathname='/cc-travel-report/overview-birst/')
 
-app = dash.Dash(__name__)
+server = app.server
 
-app.layout = dash_table.DataTable(id='table',
-                                  columns=[{"name":i, "id":i} for i in df.columns],
-                                  data=df.to_dict("rows"),
-)
+app.config.suppress_callback_exceptions = True
+
+##VALID_USERNAME_PASSWORD_PAIRS = [
+##    [
+##        ['username'],
+##        ['password']
+##    ]
+##
+##]
 
 
-if __name__ == '__main__':
-    app.run_server(debug=True)
+#auth = dash_auth.BasicAuth(app, VALID_USERNAME_PASSWORD_PAIRS)
